@@ -1,0 +1,9 @@
+{
+    "name": "basic-app/migration",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "BasicApp\\Migration\\" : ""
+        }
+    }
+}
