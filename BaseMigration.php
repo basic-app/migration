@@ -4,126 +4,128 @@
  * @license MIT
  * @link https://basic-app.com
  */
+namespace BasicApp\Migration;
+
 abstract class BaseMigration extends \CodeIgniter\Database\Migration
 {
 
     CONST COLUMN = Column::class;
 
-    public static function createColumn(array $data = [])
+    public function createColumn(array $data = []) : Column
     {
         $class = static::COLUMN;
 
         return $class::factory($data);
     }
 
-    public static function int($constraint = null)
+    public function int($constraint = null) : Column
     {
-        return static::createColumn()->int($constraint);
+        return $this->createColumn()->int($constraint);
     }
 
-    public static function integer($constraint = null)
+    public function integer($constraint = null) : Column
     {
-        return static::int($constraint);
+        return $this->int($constraint);
     }
 
-    public static function tinyInt($constraint = null)
+    public function tinyInt($constraint = null) : Column
     {
-        return static::createColumn()->tinyInt($constraint);
+        return $this->createColumn()->tinyInt($constraint);
     }
 
-    public static function tinyInteger($constraint = null)
+    public function tinyInteger($constraint = null) : Column
     {
-        return static::tinyInt($constraint);
+        return $this->tinyInt($constraint);
     }
 
-    public static function smallInt($constraint = null)
+    public function smallInt($constraint = null) : Column
     {
-        return static::createColumn()->smallInt($constraint);
+        return $this->createColumn()->smallInt($constraint);
     }
 
-    public static function smallInteger($constraint = null)
+    public function smallInteger($constraint = null) : Column
     {
-        return static::smallInt($constraint);
+        return $this->smallInt($constraint);
     }    
 
-    public static function mediumInt($constraint = null)
+    public function mediumInt($constraint = null) : Column
     {
-        return static::createColumn()->mediumInt($constraint);
+        return $this->createColumn()->mediumInt($constraint);
     }
 
-    public static function mediumInteger($constraint = null)
+    public function mediumInteger($constraint = null) : Column
     {
-        return static::mediumInt($constraint);
+        return $this->mediumInt($constraint);
     }
 
-    public static function created()
+    public function created() : Column
     {    
-        return static::createColumn()->created();
+        return $this->createColumn()->created();
     }
 
-    public static function updated()
+    public function updated() : Column
     {
-        return static::createColumn()->updated();
+        return $this->createColumn()->updated();
     }
 
-    public static function date()
+    public function date() : Column
     {
-        return static::createColumn()->date();
+        return $this->createColumn()->date();
     }
 
-    public static function time()
+    public function time() : Column
     {
-        return static::createColumn()->time();
+        return $this->createColumn()->time();
     }
 
-    public static function datetime()
+    public function datetime() : Column
     {
-        return static::createColumn()->datetime();
+        return $this->createColumn()->datetime();
     }
 
-    public static function varchar($constraint = 255)
+    public function varchar($constraint = 255) : Column
     {
-        return static::createColumn()->varchar($constraint);
+        return $this->createColumn()->varchar($constraint);
     }
 
-    public static function string($constraint = 255)
+    public function string($constraint = 255) : Column
     {
-        return static::varchar($constraint);
+        return $this->varchar($constraint);
     }
 
-    public static function text($constraint = 65535)
+    public function text($constraint = 65535) : Column
     {
-        return static::createColumn()->text($constraint);
+        return $this->createColumn()->text($constraint);
     }
 
-    public static function bool($default = 1)
+    public function bool($default = 1) : Column
     {
-        return static::createColumn()->bool($default);
+        return $this->createColumn()->bool($default);
     }
 
-    public static function boolean($default = 1)
+    public function boolean($default = 1) : Column
     {
-        return static::bool($default = 1);
+        return $this->bool($default = 1);
     }
 
-    public static function char($constraint)
+    public function char($constraint) : Column
     {
-        return static::createColumn()->char($constraint);
+        return $this->createColumn()->char($constraint);
     }
 
-    public static function decimal($constraint1, $constraint2)
+    public function decimal($constraint1, $constraint2) : Column
     {
-        return static::createColumn()->decimal($constraint1, $constraint2);
+        return $this->createColumn()->decimal($constraint1, $constraint2);
     }
 
-    public static function primaryKey($constraint = null, $autoIncrement = true)
+    public function primaryKey($constraint = null, $autoIncrement = true) : Column
     {
-        return static::createColumn()->primaryKey($constraint, $autoIncrement);
+        return $this->createColumn()->primaryKey($constraint, $autoIncrement);
     }
 
-    public static function foreignKey($constraint = null)
+    public function foreignKey($constraint = null) : Column
     {
-        return static::createColumn()->foreignKey($constraint);
+        return $this->createColumn()->foreignKey($constraint);
     }
 
 }

@@ -260,7 +260,7 @@ class Column implements ArrayAccess
 
     public function created()
     {
-        return $this->type(static::TYPE_TIMESTAMP . ' NULL DEFAULT CURRENT_TIMESTAMP')
+        return $this->type(static::TYPE_TIMESTAMP . ' NULL DEFAULT CURRENT_TIMESTAMP');
     }
 
     public static function updated()
@@ -270,7 +270,7 @@ class Column implements ArrayAccess
 
     public function foreignKey($constraint = null)
     {
-        return $this->int($constraint);
+        return $this->int($constraint)->default(null);
     }
 
 }

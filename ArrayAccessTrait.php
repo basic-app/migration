@@ -4,6 +4,8 @@
  * @license MIT
  * @link https://basic-app.com
  */
+namespace BasicApp\Migration;
+
 trait ArrayAccessTrait
 {
 
