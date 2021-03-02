@@ -263,7 +263,7 @@ class Column implements ArrayAccess
         return $this->type(static::TYPE_TIMESTAMP . ' NULL DEFAULT CURRENT_TIMESTAMP');
     }
 
-    public static function updated()
+    public function updated()
     {
         return $this->datetime();
     }
