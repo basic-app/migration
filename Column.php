@@ -6,9 +6,7 @@
  */
 namespace BasicApp\Migration;
 
-use ArrayAccess;
-
-class Column implements ArrayAccess
+class Column
 {
 
     protected $_data = [];
