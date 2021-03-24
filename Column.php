@@ -11,8 +11,6 @@ use ArrayAccess;
 class Column implements ArrayAccess
 {
 
-    use ArrayAccessTrait;
-
     protected $_data = [];
 
     const NULL = 'null';
