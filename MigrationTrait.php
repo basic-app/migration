@@ -6,8 +6,12 @@
  */
 namespace BasicApp\Migration;
 
+use Webmozart\Assert\Assert;
+
 trait MigrationTrait
 {
+
+    protected $table;
 
     protected $columnClass = Column::class;
 
@@ -126,6 +130,57 @@ trait MigrationTrait
     public function foreignKey($constraint = null) : Column
     {
         return $this->createColumn()->foreignKey($constraint);
+    }
+
+    public function foreignKeyName(string $field)
+    {
+        return $this->table . '_' . $field . '_foreign';
+    }
+
+    public function addForeignKey(string $field, string $foreignTable, string $foreignTableField, string $onDelete = 'RESTRICT',string $onUpdate = 'RESTRICT')
+    {
+        Assert::notEmpty($this->table, 'Table not defined.');
+
+        $allowActions = [
+            'CASCADE',
+            'SET NULL',
+            'NO ACTION',
+            'RESTRICT',
+            'SET DEFAULT',
+        ];
+        
+        $sql = 'ALTER TABLE :table ADD CONSTRAINT :keyName FOREIGN KEY (:field) REFERENCES :foreignTable (:foreignTableField)';
+
+        $keyName = $this->foreignKeyName($field);
+
+        $sql = strtr($sql, [
+            ':table' => $this->db->escapeIdentifiers($this->table),
+            ':keyName' => $this->db->escapeIdentifiers($keyName),
+            ':field' => $this->db->escapeIdentifiers($field),
+            ':foreignTable' => $this->db->escapeIdentifiers($foreignTable),
+            ':foreignTableField' => $this->db->escapeIdentifiers($foreignTableField)
+        ]);  
+            
+        if ($onDelete && in_array($onDelete, $allowActions, true))
+        {
+            $sql .= ' ON DELETE ' . $onDelete;
+        }
+
+        if ($onUpdate && in_array($onUpdate, $allowActions, true))
+        {
+            $sql .= ' ON UPDATE ' . $onUpdate;
+        }
+
+        $sql .= ';';
+
+        return $this->db->query($sql);
+    }
+
+    public function dropForeignKey(string $field)
+    {
+        Assert::notEmpty($this->table, 'Table not defined.');
+
+        return $this->forge->dropForeignKey($this->table, $this->foreignKeyName($field));
     }
 
 }
