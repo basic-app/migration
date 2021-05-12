@@ -7,6 +7,7 @@
 namespace BasicApp\Migration;
 
 use Webmozart\Assert\Assert;
+use Exception;
 
 trait MigrationTrait
 {
@@ -181,6 +182,22 @@ trait MigrationTrait
         Assert::notEmpty($this->table, 'Table not defined.');
 
         return $this->forge->dropForeignKey($this->table, $this->foreignKeyName($field));
+    }
+
+    public function createView(string $name, string $sql)
+    {
+        if (!$this->db->simpleQuery('CREATE VIEW `' . $name . '` AS ' . $sql))
+        {
+            throw new Exception($this->db->error());
+        }
+    }
+
+    public function dropView(string $name)
+    {
+        if (!$this->db->simpleQuery('DROP VIEW `' . $name . '`'))
+        {
+            throw new Exception($this->db->error());
+        }
     }
 
 }
