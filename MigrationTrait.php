@@ -186,7 +186,7 @@ trait MigrationTrait
 
     public function createView(string $name, string $sql)
     {
-        if (!$this->db->simpleQuery('CREATE VIEW `' . $name . '` AS ' . $sql))
+        if (!$this->db->simpleQuery('CREATE VIEW `' . $this->db->DBPrefix . $name . '` AS ' . $sql))
         {
             throw new Exception($this->db->error());
         }
@@ -194,7 +194,7 @@ trait MigrationTrait
 
     public function dropView(string $name)
     {
-        if (!$this->db->simpleQuery('DROP VIEW `' . $name . '`'))
+        if (!$this->db->simpleQuery('DROP VIEW `' . $this->db->DBPrefix . $name . '`'))
         {
             throw new Exception($this->db->error());
         }
