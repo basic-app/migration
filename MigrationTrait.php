@@ -123,6 +123,11 @@ trait MigrationTrait
         return $this->createColumn()->char(2)->default($default);
     }
 
+    public function sort($default = null) : Column
+    {
+        return $this->createColumn()->int(11);
+    }
+
     public function decimal($constraint1, $constraint2) : Column
     {
         return $this->createColumn()->decimal($constraint1, $constraint2);
